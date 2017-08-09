@@ -35,7 +35,7 @@ if ($_SESSION['session'] == '') {
                     <div class="form-group">
                         <div class="col-xs-12 text-center">
                             <div class="user-thumb text-center">
-                                <img alt="thumbnail" class="img-circle" width="100" src="assets/images/user.png" style="height: 50px;width: 50px"><h3><?php echo ucfirst($_SESSION['first_name']); ?></h3>
+                                <img alt="thumbnail" class="img-circle" width="100" src="assets/images/user.png" style="height: 50px;width: 50px"><h3><?php echo ucfirst($_SESSION['username']); ?></h3>
                                 <!--<div class="mdi mdi-account img-circle"></div>-->
                             </div>
                         </div>
