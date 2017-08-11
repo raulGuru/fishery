@@ -1,7 +1,7 @@
 <?php include_once 'include/header.php'; ?>
 <script type="text/javascript">
     function myDateFormatter(dateObject) {
-        if(dateObject == ""){
+        if (dateObject == "") {
             return "";
         }
         var d = new Date(dateObject);
@@ -22,8 +22,13 @@
         $(".results").hide();
         $("#btn_getReport").click(function () {
             var fromDate = $("#from_date").val();
-            frmDate = myDateFormatter(fromDate);
             var toDate = $("#to_date").val();
+
+            if (fromDate == '' || toDate == '') {
+                alert('From Date and To Date cannot be blank.');
+                return false;
+            }
+            frmDate = myDateFormatter(fromDate);
             toDt = myDateFormatter(toDate);
             if (frmDate != '' && toDt != '') {
                 var datastring = 'from_date=' + frmDate + '&to_date=' + toDt;
@@ -33,23 +38,20 @@
                     data: datastring,
                     success: function (response)
                     {
-                        if (response != '')
+                        if ((response == 'false') || (response == 'No records to display.'))
+                        {
+                        } else
                         {
                             $(".no_result").hide();
                             $(".results").show();
                             $(".results").html(response);
-                        } else
-                        {
-                            $(".results").hide();
-                            $("#errormsg").html(response);
-                            $(".alert-danger").show();
                         }
                     }
                 });
             }
             return false;
         });
-   });
+    });
 </script>
 <div id="page-wrapper" style="min-height: 125px;">
     <div class="container-fluid">
@@ -113,7 +115,7 @@
 </div>
 
 <script>
-    $('#from_date, #to_date').datepicker({ dateFormat: "DD, d MM, yy" });
+    $('#from_date, #to_date').datepicker({dateFormat: "DD, d MM, yy"});
 </script>
 
 <?php include_once 'include/footer.php'; ?>
