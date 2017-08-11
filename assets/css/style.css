@@ -32,7 +32,8 @@
     outline: none !important;
 }
 body {
-    background: #2f323e;
+    /*background: #2f323e;*/
+    background-image: url("../images/background.jpg");
     /*font-family: 'Rubik', sans-serif;*/
     font-family: 'Roboto';
     margin: 0;
@@ -918,6 +919,7 @@ pre {
 }
 .navbar-default {
     border: 0px;
+    /*min-height: 100px !important;*/
 }
 .navbar-top-links {
     margin-right: 0;

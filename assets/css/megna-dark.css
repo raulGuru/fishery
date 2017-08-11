@@ -27,7 +27,7 @@
 }
 /*Just change your choise color here its theme Colors*/
 body {
-    background: #2f323e;
+    /*background: #2f323e;*/
     font-family: 'Roboto';
 }
 /*Top Header Part*/
@@ -66,6 +66,7 @@ body {
 .sidebar {
     background: #2f323e;
     box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+    margin-top: 40px;
 }
 .sidebar .label-custom {
     background: #01c0c8;
