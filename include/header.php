@@ -7,9 +7,9 @@ if ($_SESSION['session'] == '') {
 }
 
 $segments = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
-if (isset($segments[1]) && $segments[1] == 'searchticket.php') {
+if(isset($segments[1]) && $segments[1] == 'searchticket.php') {
     $active = '2';
-} else {
+}else{
     $active = '1';
 }
 ?>
@@ -63,7 +63,7 @@ if (isset($segments[1]) && $segments[1] == 'searchticket.php') {
                                 <span class="caret"></span>
                             </a>
                             <ul class="logout dropdown-menu dropdown-user animated flipInY">
-                                <li><a href="change_password.php" style="width: auto !important"><i class="ti-pencil"></i> Change Password</a></li>
+                                <li><a href="changepassword.php" style="width: auto !important"><i class="ti-pencil"></i> Change Password</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="logout.php" style="width: auto !important"><i class="ti-power-off"></i>  Logout</a></li>
                             </ul>

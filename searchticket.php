@@ -13,7 +13,7 @@
                                 <h5 class="m-t-30 m-b-10">Transaction ID</h5>
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="" required="required" name="transactionid" value="<?php echo ((isset($_POST['transactionid']) && !empty(trim($_POST['transactionid']))) ? $_POST['transactionid'] : '')  ?>">
-                                        <button name="book_ticket" type="submit" value="search" id="" class="btn btn-default btn-rounded">Search</button>
+                                        <button name="search_ticket" type="submit" value="search" id="" class="btn btn-default btn-rounded">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -47,8 +47,8 @@
                                     <thead>
                                     <tr>
                                         <th>Category Type</th>
-                                        <th>Adult</th>
-                                        <th>Child</th>
+                                        <th>Count</th>
+<!--                                        <th>Child</th>-->
                                         <th>Amount ( ₹ )</th>
                                     </tr>
                                     </thead>
@@ -65,7 +65,7 @@
                                         while ($obj = $result->fetch_object()) {
                                             echo "<tr><td>".$obj->name."</td>";
                                             echo "<td>".$obj->adult."</td>";
-                                            echo "<td>".$obj->child."</td>";
+                                            //echo "<td>".$obj->child."</td>";
                                             echo "<td>".$obj->totalamount ."</td></tr>";
                                         }
                                         $result->close();
@@ -88,17 +88,17 @@
                                     <tr>
                                         <td>Total</td>
                                         <td><?php echo $totalR->adult; ?></td>
-                                        <td><?php echo $totalR->child; ?></td>
+<!--                                        <td>--><?php //echo $totalR->child; ?><!--</td>-->
                                         <td><?php echo $totalR->visitoramount; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Photography</td>
-                                        <td colspan="2"><?php echo $totalR->name  ?></p></td>
+                                        <td colspan="1"><?php echo $totalR->name  ?></p></td>
                                         <td><?php echo $totalR->photographyamount; ?></td>
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <td colspan="2">Sub-Total</td>
+                                        <td colspan="1">Sub-Total</td>
                                         <td><?php echo ($totalR->visitoramount + $totalR->photographyamount); ?></td>
                                     </tr>
                                     </tbody>
@@ -112,7 +112,8 @@
                         <div class="white-box">
                             <div class="row">
                                 <div style="align-items: center">
-                                    <button name="book_ticket" type="submit" value="book_ticket" id="book_ticket" class="btn btn-block btn-info btn-rounded" style="margin: auto; display: block;width: 200px;">Print</button>
+                                    <button name="print_ticket" type="submit" value="print_ticket" id="print_ticket" class="btn btn-block btn-info btn-rounded" style="margin: auto; display: block;width: 200px;">Print</button>
+                                    <input type="hidden" name="print_booking_id" id="print_booking_id" value="<?php echo $bookingid;  ?>">
                                 </div>
                             </div>
                         </div>
@@ -133,5 +134,20 @@
         ?>
     </div>
 </div>
+<script>
+    $("#print_ticket").click(function () {
+        var bookingid = $("#print_booking_id").val();
+            $.ajax({
+                url: 'ajax/printticket.php',
+                type: 'POST',
+                data: {bookingid: bookingid},
+                success: function (response)
+                {
+                    console.log(response);
+                }
+            });
+        return false;
+    });
+</script>
 
 <?php include_once 'include/footer.php' ?>
