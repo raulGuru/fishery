@@ -7,9 +7,9 @@ if ($_SESSION['session'] == '') {
 }
 
 $segments = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
-if(isset($segments[1]) && $segments[1] == 'searchticket.php') {
+if (isset($segments[1]) && $segments[1] == 'searchticket.php') {
     $active = '2';
-}else{
+} else {
     $active = '1';
 }
 ?>
@@ -43,6 +43,14 @@ if(isset($segments[1]) && $segments[1] == 'searchticket.php') {
         <div id="wrapper">
             <nav class="navbar navbar-default navbar-static-top m-b-0" style="min-height: 100px !important;">
                 <div class="navbar-header">
+                    <div class="left-logo">
+                        <!-- Logo -->
+                        <a class="logo" href="index.php">
+                            <b>
+                                <img src="http://localhost/fishery/assets/images/maharashtralogo.png" alt="home" class="light-logo"> Department of Fisheries, Maharashtra
+                            </b>
+                        </a>
+                    </div>
                 </div>
             </nav>
             <div class="navbar-default sidebar" role="navigation">
@@ -52,7 +60,7 @@ if(isset($segments[1]) && $segments[1] == 'searchticket.php') {
                         </li>
                         <li> <a href="searchticket.php" class="waves-effect <?php echo ($active == '2' ? 'active' : ''); ?>"><i class="mdi mdi-account-search fa-fw"></i> <span class="hide-menu">Search Ticket<span class="fa arrow"></span><span class="label label-rouded label-warning pull-right">30</span></span></a>
                         </li>
-                        <li> <a href="report.php" class="waves-effect <?php echo ($active == '2' ? 'active' : ''); ?>"><i class="mdi mdi-chart-areaspline fa-fw"></i> <span class="hide-menu">Report<span class="fa arrow"></span><span class="label label-rouded label-warning pull-right">30</span></span></a>
+                        <li> <a href="report.php" class="waves-effect <?php echo ($active == '3' ? 'active' : ''); ?>"><i class="mdi mdi-chart-areaspline fa-fw"></i> <span class="hide-menu">Report<span class="fa arrow"></span><span class="label label-rouded label-warning pull-right">30</span></span></a>
                         </li>
                         <li class="dropdown logout">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
