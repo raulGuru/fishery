@@ -388,7 +388,7 @@ if(isset($_POST['edit_ticket']))
             }
             else
             {
-                $('#select_photo').removeAttr('required').prop("disabled", true)
+                $('#select_photo').removeAttr('required').prop("disabled", true).val('0');
             }
         });
 
@@ -406,10 +406,10 @@ if(isset($_POST['edit_ticket']))
             return false;
         }
         $sphot = $('#select_photo');
-//        if($sphot.has('required') && $sphot.val() == '0'){
-//            alert('Please select Type of Photography');
-//            return false;
-//        }
+        if((typeof $sphot.attr('required') !== 'undefined') && ($sphot.val() == '0')){
+            alert('Please select Type of Photography');
+            return false;
+        }
     });
 </script>
 <script>
@@ -427,9 +427,10 @@ if(isset($_POST['edit_ticket']))
         });
 
         var photography = editTicket.photography;
-        $('input[name="photography[is]"][value='+photography.is+']').prop("checked", true);
-        if(typeof photography.type !== 'undefined')
+        $('input[name="photography[is]"][value='+photography.is+']').prop("checked", true).trigger('change');
+        if(typeof photography.type !== 'undefined'){
             $('#select_photo').val(photography.type);
+        }
     }
 </script>
 <script>
