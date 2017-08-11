@@ -46,9 +46,7 @@ if (isset($segments[1]) && $segments[1] == 'searchticket.php') {
                     <div class="left-logo">
                         <!-- Logo -->
                         <a class="logo" href="index.php">
-                            <b>
-                                <img src="http://localhost/fishery/assets/images/maharashtralogo.png" alt="home" class="light-logo"> Department of Fisheries, Maharashtra
-                            </b>
+                            <h3 class="box-title"><img src="http://localhost/fishery/assets/images/maharashtralogo.png" alt="home" class="light-logo"> &nbsp;Department of Fisheries, Maharashtra</h3>
                         </a>
                     </div>
                 </div>

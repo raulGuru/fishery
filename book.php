@@ -1,10 +1,14 @@
 <?php
+    if(isset($_POST['confirm_pay']))
+    {
+        session_start();
 
-    if(!empty($_POST['book']))
+        $sessticket = $_SESSION['confirmticket'];
+        if(!empty($sessticket['book']))
     {
         require_once 'include/dbconnect.php';
 
-        $book = $_POST['book'];
+        $book = $sessticket['book'];
         $date = date("Y-m-d", strtotime($book['visit_date']));
         $time = $book['visit_time'];
         $userid = '1';
@@ -31,7 +35,7 @@
                 printf("category Errormessage: %s\n", $mysqli->error); exit();
             }
 
-            $visitor = $_POST['visitor'];
+            $visitor = $sessticket['visitor'];
             foreach ($visitor as $k => $v) {
                 $adult = (!empty($v['adlt']) ? $v['adlt'] : 0);
                 $child= (!empty($v['chld']) ? $v['chld'] : 0);
@@ -46,12 +50,12 @@
                 }
             }
 
-            $total = $_POST['total'];
+            $total = $sessticket['total'];
             $tladult = $total['adlt'];
-            $tlchild = $total['chld'];
+                $tlchild = 0;
             $visitoramount = $total['amnt'];
 
-            $photography = $_POST['photography'];
+                $photography = $sessticket['photography'];
             $ptype = (!empty($photography['type']) ? $photography['type'] : NULL);
             $pamount = 0;
             if( !is_null($ptype) ) {
@@ -96,6 +100,10 @@
         <?php
     }
     else
+    {
+        echo 'something went wrong with book post';
+    }
+    }else
     {
         echo 'Direct access to script not allowed';
     }

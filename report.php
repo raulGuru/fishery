@@ -1,6 +1,9 @@
 <?php include_once 'include/header.php'; ?>
 <script type="text/javascript">
     function myDateFormatter(dateObject) {
+        if(dateObject == ""){
+            return "";
+        }
         var d = new Date(dateObject);
         var day = d.getDate();
         var month = d.getMonth() + 1;
@@ -22,7 +25,7 @@
             frmDate = myDateFormatter(fromDate);
             var toDate = $("#to_date").val();
             toDt = myDateFormatter(toDate);
-            if (frmDate != '' && toDate != '') {
+            if (frmDate != '' && toDt != '') {
                 var datastring = 'from_date=' + frmDate + '&to_date=' + toDt;
                 $.ajax({
                     url: 'ajax/getReport.php',
@@ -110,28 +113,7 @@
 </div>
 
 <script>
-    $('#from_date, #to_date').datepicker({
-        dateFormat: "DD, d MM, yy",
-        //        minDate: 0,
-        beforeShowDay: function (date) {
-            var day = date.getDay();
-            return [(day != 1), ''];
-        },
-        onSelect: function (dateText, inst) {
-            var date = $(this).datepicker('getDate');
-            var dayOfWeek = date.getUTCDay();
-            if (dayOfWeek == 6)
-            {
-                if ($("#selectSlot option[value='20']").length == 0) {
-                    $("#selectSlot").append('<option value="20">8:00 PM - 9:00 PM</option>');
-                }
-            } else
-            {
-                $("#selectSlot option[value='20']").remove();
-            }
-            $("#selectSlot").val('');
-        }
-    });
+    $('#from_date, #to_date').datepicker({ dateFormat: "DD, d MM, yy" });
 </script>
 
 <?php include_once 'include/footer.php'; ?>
