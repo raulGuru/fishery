@@ -1,7 +1,7 @@
-<?php include_once 'include/header.php';
+<?php
+include_once 'include/header.php';
 
-if(isset($_POST['get_reports']))
-{
+if (isset($_POST['get_reports'])) {
     $fdate = date("Y-m-d", strtotime($_POST['from_date']));
     $tdate = date("Y-m-d", strtotime($_POST['to_date']));
 
@@ -43,9 +43,9 @@ if(isset($_POST['get_reports']))
         $visitor = mysqli_query($mysqli, $visitor_query)or die('Username or password wrong...');
 
         while ($visitorrow = mysqli_fetch_assoc($visitor)) {
-            $data[$visitorrow['category'].'_category'] = $visitorrow['category'];
-            $data[$visitorrow['category'].'_adult'] = $visitorrow['adult'];
-            $data[$visitorrow['category'].'_totalamount'] = $visitorrow['totalamount'];
+            $data[$visitorrow['category'] . '_category'] = $visitorrow['category'];
+            $data[$visitorrow['category'] . '_adult'] = $visitorrow['adult'];
+            $data[$visitorrow['category'] . '_totalamount'] = $visitorrow['totalamount'];
         }
         $data['total_amount'] = $data['visitoramount'] + $data['photographyamount'];
         $result[] = $data;
@@ -95,20 +95,20 @@ if(isset($_POST['get_reports']))
             </div>
         </div>
         <?php
-            if(isset($result))
-            { ?>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="white-box">
-                            <h3 class="box-title">Results</h3>
-                            <div class="row">
-                                <div class="table-responsive" style="text-align: center">
-                                    <?php
-                                    if(!empty($result))
-                                    { ?>
-                                        <div class="results">
-                                            <table id="myTable" class="table color-bordered-table info-bordered-table table-striped">
-                                                <thead>
+        if (isset($result)) {
+            ?>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <h3 class="box-title">Results</h3>
+                        <div class="row">
+                            <div class="table-responsive" style="text-align: center">
+                                <?php
+                                if (!empty($result)) {
+                                    ?>
+                                    <div class="results">
+                                        <table id="myTable" class="table color-bordered-table info-bordered-table table-striped">
+                                            <thead>
                                                 <tr>
                                                     <th>Transaction ID.</th>
                                                     <th>Visit Date</th>
@@ -124,23 +124,23 @@ if(isset($_POST['get_reports']))
                                                     <th>Photography</th>
                                                     <th>Amount</th>
                                                 </tr>
-                                                </thead>
-                                                <tbody>
+                                            </thead>
+                                            <tbody>
                                                 <?php
-                                                foreach ($result as $data)
-                                                { ?>
+                                                foreach ($result as $data) {
+                                                    ?>
                                                     <tr class="results">
                                                         <td><?php echo $data['transactionid']; ?></td>
                                                         <td><?php echo $data['visit_date']; ?></td>
                                                         <td><?php echo $data['visit_time']; ?></td>
-                                                        <td><?php echo (isset($data['GV_category']) && $data['GV_category'] != '') ? ($data['GV_adult']) : '0';  ?></td>
-                                                        <td><?php echo (isset($data['GVC_category']) && $data['GVC_category'] != '') ? ($data['GVC_adult']) : '0';  ?></td>
-                                                        <td><?php echo (isset($data['EI_category']) && $data['EI_category'] != '') ? ($data['EI_adult']) : '0';  ?></td>
-                                                        <td><?php echo (isset($data['RP_category']) && $data['RP_category'] != '') ? ($data['RP_adult']) : '0';  ?></td>
-                                                        <td><?php echo (isset($data['GE_category']) && $data['GE_category'] != '') ? ($data['GE_adult']) : '0';  ?></td>
-                                                        <td><?php echo (isset($data['IV_category']) && $data['IV_category'] != '') ? ($data['IV_adult']) : '0';  ?></td>
-                                                        <td><?php echo (isset($data['IVC_category']) && $data['IVC_category'] != '') ? ($data['IVC_adult']) : '0';  ?></td>
-                                                        <td><?php echo (isset($data['PH_category']) && $data['PH_category'] != '') ? ($data['PH_adult']) : '0';  ?></td>
+                                                        <td><?php echo (isset($data['GV_category']) && $data['GV_category'] != '') ? ($data['GV_adult']) : '0'; ?></td>
+                                                        <td><?php echo (isset($data['GVC_category']) && $data['GVC_category'] != '') ? ($data['GVC_adult']) : '0'; ?></td>
+                                                        <td><?php echo (isset($data['EI_category']) && $data['EI_category'] != '') ? ($data['EI_adult']) : '0'; ?></td>
+                                                        <td><?php echo (isset($data['RP_category']) && $data['RP_category'] != '') ? ($data['RP_adult']) : '0'; ?></td>
+                                                        <td><?php echo (isset($data['GE_category']) && $data['GE_category'] != '') ? ($data['GE_adult']) : '0'; ?></td>
+                                                        <td><?php echo (isset($data['IV_category']) && $data['IV_category'] != '') ? ($data['IV_adult']) : '0'; ?></td>
+                                                        <td><?php echo (isset($data['IVC_category']) && $data['IVC_category'] != '') ? ($data['IVC_adult']) : '0'; ?></td>
+                                                        <td><?php echo (isset($data['PH_category']) && $data['PH_category'] != '') ? ($data['PH_adult']) : '0'; ?></td>
                                                         <td>
                                                             <?php
                                                             switch ($data['photography']) {
@@ -164,36 +164,32 @@ if(isset($_POST['get_reports']))
                                                         </td>
                                                         <td><?php echo $data['total_amount']; ?></td>
                                                     </tr>
-                                                    <?php
-                                                } ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                <?php }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     <?php
-                                    }else
-                                    { ?>
-                                        <div class="no_result">
-                                            No records to display
-                                        </div>
-                                    <?php
-                                    }
+                                } else {
                                     ?>
-                                </div>
+                                    <div class="no_result">
+                                        No records to display
+                                    </div>
+                                    <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+            </div>
+        <?php } ?>
     </div>
 </div>
 
 <script>
-    $('#from_date, #to_date').datepicker({ dateFormat: "DD, d MM, yy" });
-    $('#from_date, #to_date').datepicker().datepicker("setDate", new Date());
-
-
-
-</script>
+    $('#from_date, #to_date').datepicker({dateFormat: "DD, d MM, yy"});
+    $('#from_date, #to_date').datepicker().datepicker("setDate", new Date());</script>
 
 <link href="assets/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -207,7 +203,7 @@ if(isset($_POST['get_reports']))
 <script src="assets/js/buttons.html5.min.js"></script>
 <!--<script src="assets/js/buttons.print.min.js"></script>-->
 <script>
-    if($(".results").length != 0)
+    if ($(".results").length != 0)
     {
         $('#myTable').DataTable({
             "order": [[2, 'asc']],
@@ -218,7 +214,12 @@ if(isset($_POST['get_reports']))
                 ['10 rows', '25 rows', '50 rows', 'Show all']
             ],
             buttons: [
-                'pageLength', 'copy', 'csv', 'excel', 'pdf'
+                'pageLength', 'copy', 'csv', 'excel',
+                {
+                    extend: 'pdf',
+                    orientation: 'landscape'
+//                pageSize: 'LEGAL'
+                }
             ]
         });
     }
