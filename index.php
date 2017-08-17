@@ -9,63 +9,64 @@ if(isset($_POST['edit_ticket']))
 }
 
 ?>
-    <div id="page-wrapper" style="min-height: 125px;">
-        <div class="container-fluid">
-            <form class="form-horizontal" id="frm_book_ticket" method="post" action="confirmticket.php">
-                <div class="row bg-title"></div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <?php if ($_SESSION['pwd_changed'] != '') { ?>
-                            <div class="alert alert-success alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="clearPwdSession();">×</button><?php echo ($_SESSION['pwd_changed'] != '') ? $_SESSION['pwd_changed'] : '' ?></div>
-                        <?php } ?>
-                        <div class="white-box">
-                            <h3 class="box-title">Select Date & Time of Visit</h3>
-                            <div class="row">
-                                <div class="table-responsive" style="margin-top: -20px">
-                                    <div class="col-md-4">
-                                        <h5 class="m-t-30 m-b-10">Visit Date</h5>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="datepicker" placeholder="mm/dd/yyyy" required="required" name="book[visit_date]">
-                                            <span class="input-group-addon">
-                              <i class="icon-calender"></i>
-                              </span>
-                                        </div>
+<div id="page-wrapper" style="min-height: 125px;">
+    <div class="container-fluid">
+        <form class="form-horizontal" id="frm_book_ticket" method="post" action="confirmticket.php">
+            <div class="row bg-title"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <?php if ($_SESSION['pwd_changed'] != '') { ?>
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="clearPwdSession();">×</button><?php echo ($_SESSION['pwd_changed'] != '') ? $_SESSION['pwd_changed'] : '' ?></div>
+                    <?php } ?>
+                    <div class="white-box">
+                        <div class="row">
+                            <h3 class="box-title" style="margin-left: 40px !important;">Select Date & Time of Visit</h3>
+
+                            <div class="table-responsive" style="margin-top: -20px">
+                                <div class="col-md-4" style="padding-left: 0px !important;padding-right: 0px !important;">
+                                    <h5 class="m-t-30 m-b-10">Visit Date</h5>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="datepicker" placeholder="mm/dd/yyyy" required="required" name="book[visit_date]">
+                                        <span class="input-group-addon">
+                                            <i class="icon-calender"></i>
+                                        </span>
                                     </div>
-                                    <div class="col-md-4">
-                                        <h5 class="m-t-30 m-b-10">Available Slots</h5>
-                                        <select class="bs-select-hidden form-control dropdown" data-style="form-control" id="selectSlot" required="required" name="book[visit_time]" >
-                                            <option value="">Select Time Slot</option>
-                                            <option value="10">10:00 AM - 11:00 AM</option>
-                                            <option value="11">11:00 AM - 12:00 PM</option>
-                                            <option value="12">12:00 PM - 1:00 PM</option>
-                                            <option value="13">1:00 PM - 2:00 PM</option>
-                                            <option value="14">2:00 PM - 3:00 PM</option>
-                                            <option value="15">3:00 PM - 4:00 PM</option>
-                                            <option value="16">4:00 PM - 5:00 PM</option>
-                                            <option value="17">5:00 PM - 6:00 PM</option>
-                                            <option value="18">6:00 PM - 7:00 PM</option>
-                                            <option value="19">7:00 PM - 8:00 PM</option>
-                                            <option value="20">8:00 PM - 9:00 PM</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5 class="m-t-30">Tickets Available</h5>
-                                        <input type="text" class="form-control" placeholder="500" required="required" name="book[tickets_available]" disabled="disabled" id="tickets_available">
-                                    </div>
+                                </div>
+                                <div class="col-md-4" >
+                                    <h5 class="m-t-30 m-b-10">Available Slots</h5>
+                                    <select class="bs-select-hidden form-control dropdown" data-style="form-control" id="selectSlot" required="required" name="book[visit_time]" >
+                                        <option value="">Select Time Slot</option>
+                                        <option value="10">10:00 AM - 11:00 AM</option>
+                                        <option value="11">11:00 AM - 12:00 PM</option>
+                                        <option value="12">12:00 PM - 1:00 PM</option>
+                                        <option value="13">1:00 PM - 2:00 PM</option>
+                                        <option value="14">2:00 PM - 3:00 PM</option>
+                                        <option value="15">3:00 PM - 4:00 PM</option>
+                                        <option value="16">4:00 PM - 5:00 PM</option>
+                                        <option value="17">5:00 PM - 6:00 PM</option>
+                                        <option value="18">6:00 PM - 7:00 PM</option>
+                                        <option value="19">7:00 PM - 8:00 PM</option>
+                                        <option value="20">8:00 PM - 9:00 PM</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4" style="padding-left: 0px !important;padding-right: 0px !important;">
+                                    <h5 class="m-t-30">Tickets Available</h5>
+                                    <input type="text" class="form-control" placeholder="500" required="required" name="book[tickets_available]" disabled="disabled" id="tickets_available">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="white-box">
-                            <h3 class="box-title">Visitor Details</h3>
-                            <div class="row">
-                                <div class="table-responsive">
-                                    <table class="table color-bordered-table info-bordered-table js-visitor-add-tbl">
-                                        <thead>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="row">
+                            <h3 class="box-title" style="margin-left: 40px !important;">Visitor Details</h3>
+                            <div class="table-responsive">
+                                <table class="table color-bordered-table info-bordered-table js-visitor-add-tbl">
+                                    <thead>
                                         <tr>
                                             <th></th>
                                             <th>Category Type</th>
@@ -232,58 +233,58 @@ if(isset($_POST['edit_ticket']))
                                                 </div>
                                             </td>
                                         </tr>
-                                        </tbody>
-                                    </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <h3 class="box-title" style="margin-left: 40px !important;">Photography</h3>
+                        <div class="row" style="margin-left: 0px !important;">
+                            <div class="table-responsive">
+                                <div class="radio radio-success col-md-2">
+                                    <input type="radio" class="js-rdo-photo" name="photography[is]" id="phtYes" value="YES">
+                                    <label for="phtYes"> Yes </label>
+                                </div>
+                                <div class="radio radio-success col-md-2">
+                                    <input type="radio" class="js-rdo-photo" name="photography[is]" id="phtNo" value="NO" checked>
+                                    <label for="phtNo"> No </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <h5 class="col-sm-5" style="text-align: right;">Type of Photography</h5>
+                                    <div class="col-sm-7">
+                                        <select class="bs-select-hidden form-control" data-style="form-control" id="select_photo" name="photography[type]" disabled>
+                                            <option value="0">Select Type</option>
+                                            <option value="1">Mobile Photography (500₹)</option>
+                                            <option value="2">Video/Digital Camera (1000₹)</option>
+                                            <option value="3">Commercial Still Photography (5000₹)</option>
+                                            <option value="4">Commercial Videography (10000₹)</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="white-box">
-                            <h3 class="box-title">Photography</h3>
-                            <div class="row">
-                                <div class="table-responsive">
-                                    <div class="radio radio-success col-md-2">
-                                        <input type="radio" class="js-rdo-photo" name="photography[is]" id="phtYes" value="YES">
-                                        <label for="phtYes"> Yes </label>
-                                    </div>
-                                    <div class="radio radio-success col-md-2">
-                                        <input type="radio" class="js-rdo-photo" name="photography[is]" id="phtNo" value="NO" checked>
-                                        <label for="phtNo"> No </label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h5 class="col-sm-5" style="text-align: right;">Type of Photography</h5>
-                                        <div class="col-sm-7">
-                                            <select class="bs-select-hidden form-control" data-style="form-control" id="select_photo" name="photography[type]" disabled>
-                                                <option value="0">Select Type</option>
-                                                <option value="1">Mobile Photography (500₹)</option>
-                                                <option value="2">Video/Digital Camera (1000₹)</option>
-                                                <option value="3">Commercial Still Photography (5000₹)</option>
-                                                <option value="4">Commercial Videography (10000₹)</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="row">
+                            <div style="align-items: center">
+                                <button name="book_ticket" type="submit" value="book_ticket" id="book_ticket" class="btn btn-block btn-info btn-rounded" style="margin: auto; display: block;width: 200px;">Add to Cart</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="white-box">
-                            <div class="row">
-                                <div style="align-items: center">
-                                    <button name="book_ticket" type="submit" value="book_ticket" id="book_ticket" class="btn btn-block btn-info btn-rounded" style="margin: auto; display: block;width: 200px;">Add to Cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
+</div>
 
 <script>
         $('#datepicker').datepicker({

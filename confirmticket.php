@@ -77,30 +77,30 @@ $_SESSION['confirmticket'] = $_POST;
                                     <td colspan="1">Sub-Total</td>
                                     <td><?php echo ($total['amnt'] + $prate); ?></td>
                                 </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="white-box">
-                        <div class="row">
-                            <div style="align-items: center">
-                                <form action="book.php" method="post">
-                                    <button name="confirm_pay" type="submit" value="yes" id="confirm_pay" class="btn btn-block btn-info btn-rounded" style="margin: auto; display: block;width: 200px;">Pay</button>
-                                </form>
-                                <form action="index.php" method="post">
-                                    <button name="edit_ticket" type="submit" value="yes" id="edit_ticket" class="btn btn-block btn-info btn-rounded" style="margin: auto; display: block;width: 200px;">Edit</button>
-                                </form>
-                            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <div class="row">
+                        <div style="max-width: 450px;margin:0 auto;">
+                            <form action="book.php" method="post">
+                                <button name="confirm_pay" type="submit" value="yes" id="confirm_pay" class="btn btn-block btn-info btn-rounded" style="margin: auto; display: block;width: 200px;float: left">Pay</button>
+                            </form>
+                            <form action="index.php" method="post">
+                                <button name="edit_ticket" type="submit" value="yes" id="edit_ticket" class="btn btn-block btn-info btn-rounded" style="margin: auto; display: block;width: 200px; float: right">Edit</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <script>
 //    $("#confirm_pay").on("submit", function (event) {
 //        $.post("book.php");
