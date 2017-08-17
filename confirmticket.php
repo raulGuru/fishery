@@ -4,23 +4,23 @@ $_SESSION['confirmticket'] = $_POST;
 
 //echo '<pre>',print_r($_POST),'</pre>'; exit();
 ?>
-    <div id="page-wrapper" style="min-height: 125px;">
-        <div class="container-fluid">
-            <div class="row bg-title"></div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="white-box">
-                        <h3 class="box-title">Tickets Details</h3>
-                        <div class="table-responsive">
-                            <table class="table color-table info-table">
-                                <thead>
+<div id="page-wrapper" style="min-height: 125px;">
+    <div class="container-fluid">
+        <div class="row bg-title"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <h3 class="box-title">Tickets Details</h3>
+                    <div class="table-responsive">
+                        <table class="table color-table info-table">
+                            <thead>
                                 <tr>
                                     <th>Category Type</th>
                                     <th>Count</th>
                                     <th>Amount ( ₹ )</th>
                                 </tr>
-                                </thead>
-                                <tbody>
+                            </thead>
+                            <tbody>
                                 <?php
                                 $sqlc = "SELECT * FROM category";
                                 if ($result = $mysqli->query($sqlc)) {
@@ -28,14 +28,15 @@ $_SESSION['confirmticket'] = $_POST;
                                         $categories[$obj->type] = $obj->name;
                                     }
                                     $result->close();
-                                }else {
-                                    printf("$sqlc Errormessage: %s\n", $mysqli->error); exit();
+                                } else {
+                                    printf("$sqlc Errormessage: %s\n", $mysqli->error);
+                                    exit();
                                 }
                                 $visitor = $_POST['visitor'];
                                 foreach ($visitor as $k => $v) {
-                                    echo "<tr><td>". $categories[$k] ."</td>";
-                                    echo "<td>". $v['adlt'] ."</td>";
-                                    echo "<td>". $v['amnt'] ."</td></tr>";
+                                    echo "<tr><td>" . $categories[$k] . "</td>";
+                                    echo "<td>" . $v['adlt'] . "</td>";
+                                    echo "<td>" . $v['amnt'] . "</td></tr>";
                                 }
 
                                 $sqlp = "SELECT * FROM photography";
@@ -45,16 +46,16 @@ $_SESSION['confirmticket'] = $_POST;
                                         $photography[$obj->type]['rate'] = $obj->rate;
                                     }
                                     $result->close();
-                                }else {
-                                    printf("$sqlp Errormessage: %s\n", $mysqli->error); exit();
+                                } else {
+                                    printf("$sqlp Errormessage: %s\n", $mysqli->error);
+                                    exit();
                                 }
                                 $total = $_POST['total'];
 
                                 $photopost = $_POST['photography'];
-                                if($photopost['is'] == 'YES')
-                                {
+                                if ($photopost['is'] == 'YES') {
                                     $indx = $photography[$photopost['type']];
-                                }else{
+                                } else {
                                     $indx = $photography[0];
                                 }
                                 $pname = $indx['name'];
@@ -68,7 +69,7 @@ $_SESSION['confirmticket'] = $_POST;
                                 </tr>
                                 <tr>
                                     <td>Photography</td>
-                                    <td colspan="1"><?php echo $pname  ?></p></td>
+                                    <td colspan="1"><?php echo $pname ?></p></td>
                                     <td><?php echo $prate; ?></td>
                                 </tr>
                                 <tr><td></td><td></td><td></td></tr>

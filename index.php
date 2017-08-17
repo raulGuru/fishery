@@ -1,13 +1,11 @@
-<?php include_once 'include/header.php';
+<?php
+include_once 'include/header.php';
 
-if(isset($_POST['edit_ticket']))
-{
+if (isset($_POST['edit_ticket'])) {
     $eticket = $_SESSION['confirmticket'];
-}else
-{
+} else {
     $eticket = '';
 }
-
 ?>
 <div id="page-wrapper" style="min-height: 125px;">
     <div class="container-fluid">
@@ -73,8 +71,8 @@ if(isset($_POST['edit_ticket']))
                                             <th>Count</th>
                                             <th>Amount ( ₹ )</th>
                                         </tr>
-                                        </thead>
-                                        <tbody>
+                                    </thead>
+                                    <tbody>
                                         <tr>
                                             <td>
                                                 <div class="switchery-demo m-b-30">
@@ -287,117 +285,116 @@ if(isset($_POST['edit_ticket']))
 </div>
 
 <script>
-        $('#datepicker').datepicker({
-            dateFormat: "DD, d MM, yy",
-            minDate: 0,
-            beforeShowDay: function(date) {
-                var day = date.getDay();
-                return [(day != 1), ''];
-            },
-            onSelect: function (dateText, inst) {
-                //$('#selectSlot').attr("disabled", false);
+    $('#datepicker').datepicker({
+        dateFormat: "DD, d MM, yy",
+        minDate: 0,
+        beforeShowDay: function (date) {
+            var day = date.getDay();
+            return [(day != 1), ''];
+        },
+        onSelect: function (dateText, inst) {
+            //$('#selectSlot').attr("disabled", false);
 
-                var date = $(this).datepicker('getDate');
-                var dayOfWeek = date.getUTCDay();
-                if(dayOfWeek != 6)
-                {
-                    $("#selectSlot option[value='20']").remove();
-                }else
-                {
-                    if ( $("#selectSlot option[value='20']").length == 0 ){
-                        $("#selectSlot").append('<option value="20">8:00 PM - 9:00 PM</option>');
-                    }
-                }
-                $("#selectSlot").val('');
-            }
-        });
-        $("#datepicker").datepicker().datepicker("setDate", new Date());
-
-        /* #selectSlot onchange="getAvailableTickets(this);" */
-        function getAvailableTickets(sel) {
-            alert(sel.value);
-        }
-
-        $('#selectSlot').change(function() {
-            var pdata = {
-                method: 'availtickets',
-                vdate: $('#datepicker').val(),
-                vslot: $('#selectSlot').val()
-            };
-            $.ajax({
-                url: 'ajax/common.php',
-                type: 'POST',
-                data: pdata,
-                success: function (response)
-                {
-                    $('#tickets_available').val(response);
-                }
-            });
-        });
-
-        $('.numbersOnly').keyup(function () {
-            this.value = this.value.replace(/[^0-9\.]/g,'');
-        });
-
-        $('.js-switch').change(function(){
-            var $inpts = $(this).closest('tr').find('input:text').prop('disabled', !this.checked);
-            if(!this.checked){
-                $inpts.val('')
-            }
-            $('.js-row-adlt').trigger('change');
-        });
-
-        $('.js-switch').each(function () {
-            new Switchery($(this)[0], $(this).data());
-            $(this).trigger('change');
-        });
-
-        $('.js-row-adlt').change(function () {
-
-            var $this = $(this);
-            var rAdltVl = parseInt(($this.val() == '') ? 0 : $this.val());
-            var rAdltRt = parseInt($this.data('rate'));
-            var rAdltTt = rAdltVl * rAdltRt;
-
-            var $rAmnt = $this.closest('tr').find('.js-row-amnt');
-            $rAmnt.val(rAdltTt);
-
-            var ttAdltVl = 0;
-            $('.js-visitor-add-tbl .js-row-adlt').each(function () {
-                var tval = parseInt($(this).val() == '' ? 0 : $(this).val());
-                ttAdltVl = ttAdltVl + tval;
-            });
-            $('.js-tt-adlt').val(ttAdltVl);
-
-            sumTtAmnt();
-
-        });
-
-        function sumTtAmnt() {
-            var ttAmtVl = 0;
-            $('.js-visitor-add-tbl .js-row-amnt').each(function () {
-                var rAmtVl = parseInt($(this).val() == '' ? 0 : $(this).val());
-                ttAmtVl = ttAmtVl + rAmtVl;
-            });
-            $('.js-tt-amnt').val(ttAmtVl);
-        }
-
-        $('.js-rdo-photo').change(function () {
-            if($(this).val() == 'YES')
+            var date = $(this).datepicker('getDate');
+            var dayOfWeek = date.getUTCDay();
+            if (dayOfWeek != 6)
             {
-                $('#select_photo').removeAttr('disabled').prop("required", true)
-            }
-            else
+                $("#selectSlot option[value='20']").remove();
+            } else
             {
-                $('#select_photo').removeAttr('required').prop("disabled", true).val('0');
+                if ($("#selectSlot option[value='20']").length == 0) {
+                    $("#selectSlot").append('<option value="20">8:00 PM - 9:00 PM</option>');
+                }
+            }
+            $("#selectSlot").val('');
+        }
+    });
+    $("#datepicker").datepicker().datepicker("setDate", new Date());
+
+    /* #selectSlot onchange="getAvailableTickets(this);" */
+    function getAvailableTickets(sel) {
+        alert(sel.value);
+    }
+
+    $('#selectSlot').change(function () {
+        var pdata = {
+            method: 'availtickets',
+            vdate: $('#datepicker').val(),
+            vslot: $('#selectSlot').val()
+        };
+        $.ajax({
+            url: 'ajax/common.php',
+            type: 'POST',
+            data: pdata,
+            success: function (response)
+            {
+                $('#tickets_available').val(response);
             }
         });
+    });
 
-    </script>
+    $('.numbersOnly').keyup(function () {
+        this.value = this.value.replace(/[^0-9\.]/g, '');
+    });
+
+    $('.js-switch').change(function () {
+        var $inpts = $(this).closest('tr').find('input:text').prop('disabled', !this.checked);
+        if (!this.checked) {
+            $inpts.val('')
+        }
+        $('.js-row-adlt').trigger('change');
+    });
+
+    $('.js-switch').each(function () {
+        new Switchery($(this)[0], $(this).data());
+        $(this).trigger('change');
+    });
+
+    $('.js-row-adlt').change(function () {
+
+        var $this = $(this);
+        var rAdltVl = parseInt(($this.val() == '') ? 0 : $this.val());
+        var rAdltRt = parseInt($this.data('rate'));
+        var rAdltTt = rAdltVl * rAdltRt;
+
+        var $rAmnt = $this.closest('tr').find('.js-row-amnt');
+        $rAmnt.val(rAdltTt);
+
+        var ttAdltVl = 0;
+        $('.js-visitor-add-tbl .js-row-adlt').each(function () {
+            var tval = parseInt($(this).val() == '' ? 0 : $(this).val());
+            ttAdltVl = ttAdltVl + tval;
+        });
+        $('.js-tt-adlt').val(ttAdltVl);
+
+        sumTtAmnt();
+
+    });
+
+    function sumTtAmnt() {
+        var ttAmtVl = 0;
+        $('.js-visitor-add-tbl .js-row-amnt').each(function () {
+            var rAmtVl = parseInt($(this).val() == '' ? 0 : $(this).val());
+            ttAmtVl = ttAmtVl + rAmtVl;
+        });
+        $('.js-tt-amnt').val(ttAmtVl);
+    }
+
+    $('.js-rdo-photo').change(function () {
+        if ($(this).val() == 'YES')
+        {
+            $('#select_photo').removeAttr('disabled').prop("required", true)
+        } else
+        {
+            $('#select_photo').removeAttr('required').prop("disabled", true)
+        }
+    });
+
+</script>
 <script>
     $("#frm_book_ticket").on("submit", function (event) {
         //event.preventDefault();
-        if($('.js-tt-amnt').val() == '' || $('.js-tt-amnt').val() == '0')
+        if ($('.js-tt-amnt').val() == '' || $('.js-tt-amnt').val() == '0')
         {
             $('body').animate({
                 scrollTop: ($(".table-responsive").offset().top - 200)
@@ -407,36 +404,35 @@ if(isset($_POST['edit_ticket']))
             return false;
         }
         $sphot = $('#select_photo');
-        if((typeof $sphot.attr('required') !== 'undefined') && ($sphot.val() == '0')){
-            alert('Please select Type of Photography');
-            return false;
-        }
+//        if($sphot.has('required') && $sphot.val() == '0'){
+//            alert('Please select Type of Photography');
+//            return false;
+//        }
     });
 </script>
 <script>
     var editTicket = <?php echo json_encode($eticket); ?>;
-    if(editTicket !== "")
+    if (editTicket !== "")
     {
         var book = editTicket.book;
         $("#datepicker").datepicker().datepicker("setDate", book.visit_date);
         $("#selectSlot").val(book.visit_time).trigger('change');
 
         var visitor = editTicket.visitor;
-        $.each(visitor, function(index, value) {
-            $('input[name="visitor['+index+'][adlt]"]').val(value.adlt);
-            $('input[name="visitor['+index+'][chk]"]').trigger('click');
+        $.each(visitor, function (index, value) {
+            $('input[name="visitor[' + index + '][adlt]"]').val(value.adlt);
+            $('input[name="visitor[' + index + '][chk]"]').trigger('click');
         });
 
         var photography = editTicket.photography;
-        $('input[name="photography[is]"][value='+photography.is+']').prop("checked", true).trigger('change');
-        if(typeof photography.type !== 'undefined'){
+        $('input[name="photography[is]"][value=' + photography.is + ']').prop("checked", true);
+        if (typeof photography.type !== 'undefined')
             $('#select_photo').val(photography.type);
-        }
     }
 </script>
 <script>
     function clearPwdSession() {
-        <?php $_SESSION['pwd_changed'] = ''; ?>
+<?php $_SESSION['pwd_changed'] = ''; ?>
         return true;
     }
 </script>

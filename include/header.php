@@ -46,12 +46,6 @@ else{
         <div id="wrapper">
             <nav class="navbar navbar-default navbar-static-top m-b-0" style="min-height: 100px !important;">
                 <div class="navbar-header">
-				<div class="left-logo">
-                        <!-- Logo -->
-                        <a class="logo" href="index.php">
-                            <h3 class="box-title"><img src="http://localhost/fishery/assets/images/maharashtralogo.png" alt="home" class="light-logo"> &nbsp;Department of Fisheries, Maharashtra</h3>
-                        </a>
-                    </div>
                 </div>
             </nav>
             <div class="navbar-default sidebar" role="navigation">
