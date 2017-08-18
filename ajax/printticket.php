@@ -42,7 +42,7 @@
             printf("$sqlTl Errormessage: %s\n", $mysqli->error); exit();
         }
         if(!empty($printobj))
-            execprint($printobj);
+            echo execprint($printobj);
 
         exit();
     }

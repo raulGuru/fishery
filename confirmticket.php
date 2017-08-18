@@ -61,23 +61,23 @@ $_SESSION['confirmticket'] = $_POST;
                                 $pname = $indx['name'];
                                 $prate = $indx['rate'];
                                 ?>
-                                <tr><td></td><td></td><td></td></tr>
                                 <tr>
                                     <td>Total</td>
                                     <td><?php echo $total['adlt']; ?></td>
                                     <td><?php echo $total['amnt']; ?></td>
                                 </tr>
-                                <tr>
-                                    <td>Photography</td>
-                                    <td colspan="1"><?php echo $pname ?></p></td>
-                                    <td><?php echo $prate; ?></td>
-                                </tr>
-                                <tr><td></td><td></td><td></td></tr>
-                                <tr>
-                                    <td></td>
-                                    <td colspan="1">Sub-Total</td>
-                                    <td><?php echo ($total['amnt'] + $prate); ?></td>
-                                </tr>
+                                <?php if($prate != 0) { ?>
+                                    <tr>
+                                        <td>Photography</td>
+                                        <td colspan="1"><?php echo $pname ?></p></td>
+                                        <td><?php echo $prate; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="1">Sub-Total</td>
+                                        <td><?php echo ($total['amnt'] + $prate); ?></td>
+                                    </tr>
+                                <?php }?>
                             </tbody>
                         </table>
                     </div>

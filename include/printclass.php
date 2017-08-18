@@ -98,7 +98,7 @@ function execprint($obj)
         $printer->text(str_repeat("-", 48)."\n");
 
         /* photography */
-        if(!empty($invoice->visitoramount))
+        if($invoice->photographyamount != 0)
         {
             $pn = str_pad(($invoice->name) . ' Photography', 38, ' ', STR_PAD_RIGHT);
             $pamt = str_pad($invoice->photographyamount, 9, ' ', STR_PAD_RIGHT);

@@ -85,7 +85,7 @@ if (isset($_POST['get_reports'])) {
                                 <div class="col-md-4">
                                     <h5 class="m-t-30 m-b-10"> </h5>
                                     <div class="input-group">
-                                        <button name="get_reports" type="submit" value="get_reports" id="get_reports" class="btn btn-block btn-info btn-rounded" style="margin: auto; display: block;width: 200px;">Get Reports</button>
+                                        <button name="get_reports" type="submit" value="get_reports" id="get_reports" class="btn btn-block btn-info btn-rounded" style="margin-top: 25px; display: block;width: 200px;">Get Reports</button>
                                     </div>
                                 </div>
                             </div>
@@ -125,6 +125,12 @@ if (isset($_POST['get_reports'])) {
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th colspan="13" style="text-align:right"></th>
+                                                    <!--<th></th>-->
+                                                </tr>
+                                            </tfoot>
                                             <tbody>
                                                 <?php
                                                 foreach ($result as $data) {
@@ -189,7 +195,8 @@ if (isset($_POST['get_reports'])) {
 
 <script>
     $('#from_date, #to_date').datepicker({dateFormat: "DD, d MM, yy"});
-    $('#from_date, #to_date').datepicker().datepicker("setDate", new Date());</script>
+    $('#from_date, #to_date').datepicker().datepicker("setDate", new Date());
+</script>
 
 <link href="assets/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -214,13 +221,37 @@ if (isset($_POST['get_reports'])) {
                 ['10 rows', '25 rows', '50 rows', 'Show all']
             ],
             buttons: [
-                'pageLength', 'copy', 'csv', 'excel',
+                'pageLength', 'copy', 'csv',
+                {
+                    extend: 'excel',
+                    footer: true
+                },
                 {
                     extend: 'pdf',
                     orientation: 'landscape'
-//                pageSize: 'LEGAL'
                 }
-            ]
+            ],
+            "footerCallback": function ( row, data, start, end, display ) {
+                var api = this.api(), data;
+                var colNumber = [12];
+                var intVal = function ( i ) {
+                    return typeof i === 'string' ?
+//                            i.replace(/[, ₹&nbsp;]|(\.\d{2})/g, "") * 1 :
+                            i.replace(/(\.\d{2})/g, "") * 1 :
+                            typeof i === 'number' ?
+                            i : 0;
+                };
+                for (i = 0; i < colNumber.length; i++) {
+                    var colNo = colNumber[i];
+                    var total2 = api
+                            .column(colNo, {page: 'current'})
+                            .data()
+                            .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                },0 );
+                    $(api.column(colNo).footer()).html('TOTAL ₹&nbsp;' + (total2));
+                }
+            }
         });
     }
 </script>

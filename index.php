@@ -19,7 +19,7 @@ if (isset($_POST['edit_ticket'])) {
                     <?php } ?>
                     <div class="white-box">
                         <div class="row">
-                            <h3 class="box-title" style="margin-left: 40px !important;">Select Date & Time of Visit</h3>
+                            <h3 class="box-title">Select Date & Time of Visit</h3>
 
                             <div class="table-responsive" style="margin-top: -20px">
                                 <div class="col-md-4" style="padding-left: 0px !important;padding-right: 0px !important;">
@@ -75,8 +75,8 @@ if (isset($_POST['edit_ticket'])) {
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <div class="switchery-demo m-b-30">
-                                                    <input type="checkbox" class="js-switch" data-color="#99d683" data-size="small" name="visitor[GV][chk]">
+                                                <div class="m-b-30">
+                                                    <input type="checkbox" class="js-switch" name="visitor[GV][chk]">
                                                 </div>
                                             </td>
                                             <td>General Visitor (Adult)</td>
@@ -93,8 +93,8 @@ if (isset($_POST['edit_ticket'])) {
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="switchery-demo m-b-30">
-                                                    <input type="checkbox" class="js-switch" data-color="#99d683" data-size="small" name="visitor[GVC][chk]">
+                                                <div class="m-b-30">
+                                                    <input type="checkbox" class="js-switch" name="visitor[GVC][chk]">
                                                 </div>
                                             </td>
                                             <td>Child</td>
@@ -111,8 +111,8 @@ if (isset($_POST['edit_ticket'])) {
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="switchery-demo m-b-30">
-                                                    <input type="checkbox" class="js-switch" data-color="#99d683" data-size="small" name="visitor[EI][chk]">
+                                                <div class="m-b-30">
+                                                    <input type="checkbox" class="js-switch" name="visitor[EI][chk]">
                                                 </div>
                                             </td>
                                             <td>Educational Institute Visitor</td>
@@ -129,8 +129,8 @@ if (isset($_POST['edit_ticket'])) {
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="switchery-demo m-b-30">
-                                                    <input type="checkbox" class="js-switch" data-color="#99d683" data-size="small" name="visitor[RP][chk]">
+                                                <div class="m-b-30">
+                                                    <input type="checkbox" class="js-switch" name="visitor[RP][chk]">
                                                 </div>
                                             </td>
                                             <td>Retired Person</td>
@@ -147,8 +147,8 @@ if (isset($_POST['edit_ticket'])) {
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="switchery-demo m-b-30">
-                                                    <input type="checkbox" class="js-switch" data-color="#99d683" data-size="small" name="visitor[GE][chk]">
+                                                <div class="m-b-30">
+                                                    <input type="checkbox" class="js-switch" name="visitor[GE][chk]">
                                                 </div>
                                             </td>
                                             <td>Govt Employess</td>
@@ -165,8 +165,8 @@ if (isset($_POST['edit_ticket'])) {
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="switchery-demo m-b-30">
-                                                    <input type="checkbox" class="js-switch" data-color="#99d683" data-size="small" name="visitor[IV][chk]">
+                                                <div class="m-b-30">
+                                                    <input type="checkbox" class="js-switch" name="visitor[IV][chk]">
                                                 </div>
                                             </td>
                                             <td>International Visitor (Adult)</td>
@@ -183,8 +183,8 @@ if (isset($_POST['edit_ticket'])) {
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="switchery-demo m-b-30">
-                                                    <input type="checkbox" class="js-switch" data-color="#99d683" data-size="small" name="visitor[IVC][chk]">
+                                                <div class="m-b-30">
+                                                    <input type="checkbox" class="js-switch" name="visitor[IVC][chk]">
                                                 </div>
                                             </td>
                                             <td>International Visitor (Child)</td>
@@ -201,9 +201,13 @@ if (isset($_POST['edit_ticket'])) {
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="switchery-demo m-b-30">
-                                                    <input type="checkbox" class="js-switch" data-color="#99d683" data-size="small" name="visitor[PH][chk]">
+                                                <div class="m-b-30">
+                                                    <input type="checkbox" class="js-switch" name="visitor[PH][chk]">
                                                 </div>
+<!--                                                <div class="checkbox checkbox-success">-->
+<!--                                                    <input id="checkbox33" type="checkbox"><label for="checkbox33"></label>-->
+<!--                                                </div>-->
+
                                             </td>
                                             <td>Differently Abled</td>
                                             <td>
@@ -294,29 +298,14 @@ if (isset($_POST['edit_ticket'])) {
         },
         onSelect: function (dateText, inst) {
             //$('#selectSlot').attr("disabled", false);
-
-            var date = $(this).datepicker('getDate');
-            var dayOfWeek = date.getUTCDay();
-            if (dayOfWeek != 6)
-            {
-                $("#selectSlot option[value='20']").remove();
-            } else
-            {
-                if ($("#selectSlot option[value='20']").length == 0) {
-                    $("#selectSlot").append('<option value="20">8:00 PM - 9:00 PM</option>');
-                }
-            }
-            $("#selectSlot").val('');
+            $("#selectSlot").val(new Date().getHours());
+            getAvailableTicketsCount();
         }
     });
     $("#datepicker").datepicker().datepicker("setDate", new Date());
 
-    /* #selectSlot onchange="getAvailableTickets(this);" */
-    function getAvailableTickets(sel) {
-        alert(sel.value);
-    }
-
-    $('#selectSlot').change(function () {
+    /* #selectSlot onchange="getAvailableTicketsCount(this);" */
+    function getAvailableTicketsCount() {
         var pdata = {
             method: 'availtickets',
             vdate: $('#datepicker').val(),
@@ -329,8 +318,17 @@ if (isset($_POST['edit_ticket'])) {
             success: function (response)
             {
                 $('#tickets_available').val(response);
+                if(response < 0) {
+                    $('#selectSlot').val('');
+                    alert('No tickets available for selected slot !!');
+                    return false;
+                }
             }
         });
+    }
+
+    $('#selectSlot').change(function () {
+        getAvailableTicketsCount();
     });
 
     $('.numbersOnly').keyup(function () {
@@ -346,7 +344,6 @@ if (isset($_POST['edit_ticket'])) {
     });
 
     $('.js-switch').each(function () {
-        new Switchery($(this)[0], $(this).data());
         $(this).trigger('change');
     });
 
@@ -383,10 +380,10 @@ if (isset($_POST['edit_ticket'])) {
     $('.js-rdo-photo').change(function () {
         if ($(this).val() == 'YES')
         {
-            $('#select_photo').removeAttr('disabled').prop("required", true)
+            $('#select_photo').removeAttr('disabled').attr("required", true)
         } else
         {
-            $('#select_photo').removeAttr('required').prop("disabled", true)
+            $('#select_photo').removeAttr('required').attr("disabled", true)
         }
     });
 
@@ -404,10 +401,10 @@ if (isset($_POST['edit_ticket'])) {
             return false;
         }
         $sphot = $('#select_photo');
-//        if($sphot.has('required') && $sphot.val() == '0'){
-//            alert('Please select Type of Photography');
-//            return false;
-//        }
+        if($sphot.prop('required') && $sphot.val() == '0') {
+            alert('Please select Type of Photography');
+            return false;
+        }
     });
 </script>
 <script>

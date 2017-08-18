@@ -18,14 +18,13 @@
                                     <tr>
                                         <th>Category Type</th>
                                         <th>Count</th>
-<!--                                        <th>Child</th>-->
                                         <th>Amount ( ₹ )</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php
                                         $bookingid = $_REQUEST['bookingid'];
-                                        $sqlV = "SELECT a.category, b.name, a.adult, a.child, a.totalamount 
+                                        $sqlV = "SELECT a.category, b.name, a.adult, a.totalamount 
                                                           FROM visitor a 
                                                           INNER JOIN category b 
                                                           ON a.category = b.type 
@@ -35,7 +34,6 @@
                                             while ($obj = $result->fetch_object()) {
                                                 echo "<tr><td>".$obj->name."</td>";
                                                 echo "<td>".$obj->adult."</td>";
-                                                //echo "<td>".$obj->child."</td>";
                                                 echo "<td>".$obj->totalamount ."</td></tr>";
                                             }
                                             $result->close();
@@ -58,19 +56,20 @@
                                     <tr>
                                         <td>Total</td>
                                         <td><?php echo $totalR->adult; ?></td>
-<!--                                        <td>--><?php //echo $totalR->child; ?><!--</td>-->
                                         <td><?php echo $totalR->visitoramount; ?></td>
                                     </tr>
-                                    <tr>
-                                        <td>Photography</td>
-                                        <td colspan="1"><?php echo $totalR->name  ?></p></td>
-                                        <td><?php echo $totalR->photographyamount; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td colspan="1">Sub-Total</td>
-                                        <td><?php echo ($totalR->visitoramount + $totalR->photographyamount); ?></td>
-                                    </tr>
+                                    <?php if($totalR->photographyamount != 0) { ?>
+                                        <tr>
+                                            <td>Photography</td>
+                                            <td colspan="1"><?php echo $totalR->name  ?></p></td>
+                                            <td><?php echo $totalR->photographyamount; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td colspan="1">Sub-Total</td>
+                                            <td><?php echo ($totalR->visitoramount + $totalR->photographyamount); ?></td>
+                                        </tr>
+                                    <?php } ?>
                                     </tbody>
                                 </table>
                             </div>

@@ -7,8 +7,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="white-box">
+                        <div class="row">
                         <h3 class="box-title">Search ticket</h3>
-                        <div class="row m-t-20">
+                            <div class="row m-t-20" style="margin-left: 10px">
                             <div class="col-md-9">
                                 <div class="col-md-2">
                                     <h5 class="m-b-30">Transaction ID</h5>
@@ -23,6 +24,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </form>
         <?php
@@ -53,13 +55,12 @@
                                         <tr>
                                             <th>Category Type</th>
                                             <th>Count</th>
-        <!--                                        <th>Child</th>-->
                                             <th>Amount ( ₹ )</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sqlV = "SELECT a.category, b.name, a.adult, a.child, a.totalamount
+                                        $sqlV = "SELECT a.category, b.name, a.adult, a.totalamount
                                                           FROM visitor a
                                                           INNER JOIN category b
                                                           ON a.category = b.type
@@ -69,7 +70,6 @@
                                             while ($obj = $result->fetch_object()) {
                                                 echo "<tr><td>" . $obj->name . "</td>";
                                                 echo "<td>" . $obj->adult . "</td>";
-                                                //echo "<td>".$obj->child."</td>";
                                                 echo "<td>" . $obj->totalamount . "</td></tr>";
                                             }
                                             $result->close();
@@ -94,19 +94,20 @@
                                         <tr>
                                             <td>Total</td>
                                             <td><?php echo $totalR->adult; ?></td>
-        <!--                                        <td>--><?php //echo $totalR->child;  ?><!--</td>-->
                                             <td><?php echo $totalR->visitoramount; ?></td>
                                         </tr>
-                                        <tr>
-                                            <td>Photography</td>
-                                            <td colspan="1"><?php echo $totalR->name ?></p></td>
-                                            <td><?php echo $totalR->photographyamount; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td colspan="1">Sub-Total</td>
-                                            <td><?php echo ($totalR->visitoramount + $totalR->photographyamount); ?></td>
-                                        </tr>
+                                        <?php if($totalR->photographyamount != 0) { ?>
+                                            <tr>
+                                                <td>Photography</td>
+                                                <td colspan="1"><?php echo $totalR->name ?></p></td>
+                                                <td><?php echo $totalR->photographyamount; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td colspan="1">Sub-Total</td>
+                                                <td><?php echo ($totalR->visitoramount + $totalR->photographyamount); ?></td>
+                                            </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -147,7 +148,7 @@
         $.ajax({
             url: 'ajax/printticket.php',
             type: 'POST',
-            data: {bookingid: bookingid},
+            data: { bookingid: bookingid },
             success: function (response)
             {
                 console.log(response);
