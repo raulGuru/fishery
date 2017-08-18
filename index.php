@@ -336,7 +336,7 @@ if (isset($_POST['edit_ticket'])) {
     });
 
     $('.js-switch').change(function () {
-        var $inpts = $(this).closest('tr').find('input:text').prop('disabled', !this.checked);
+        var $inpts = $(this).closest('tr').find('input:text').prop('disabled', !this.checked).prop('required', this.checked);
         if (!this.checked) {
             $inpts.val('')
         }
@@ -380,10 +380,10 @@ if (isset($_POST['edit_ticket'])) {
     $('.js-rdo-photo').change(function () {
         if ($(this).val() == 'YES')
         {
-            $('#select_photo').removeAttr('disabled').attr("required", true)
+            $('#select_photo').removeAttr('disabled').attr("required", true);
         } else
         {
-            $('#select_photo').removeAttr('required').attr("disabled", true)
+            $('#select_photo').removeAttr('required').attr("disabled", true);
         }
     });
 
@@ -423,8 +423,15 @@ if (isset($_POST['edit_ticket'])) {
 
         var photography = editTicket.photography;
         $('input[name="photography[is]"][value=' + photography.is + ']').prop("checked", true);
-        if (typeof photography.type !== 'undefined')
+        if (typeof photography.type !== 'undefined') {
             $('#select_photo').val(photography.type);
+            $('#select_photo').removeAttr('disabled').attr("required", true);
+        }
+        else
+        {
+            $('#select_photo').val('0');
+            $('#select_photo').removeAttr('required').attr("disabled", true)
+        }
     }
 </script>
 <script>

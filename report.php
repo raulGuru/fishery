@@ -1,9 +1,13 @@
 <?php
 include_once 'include/header.php';
 
+$fdate = date("Y-m-d");
+$tdate = date("Y-m-d");
+
 if (isset($_POST['get_reports'])) {
     $fdate = date("Y-m-d", strtotime($_POST['from_date']));
     $tdate = date("Y-m-d", strtotime($_POST['to_date']));
+}
 
     $tslot = array(
         "10" => "10:00 AM - 11:00 AM",
@@ -50,9 +54,7 @@ if (isset($_POST['get_reports'])) {
         $data['total_amount'] = $data['visitoramount'] + $data['photographyamount'];
         $result[] = $data;
     }
-}
 ?>
-
 
 <div id="page-wrapper" style="min-height: 125px;">
     <div class="container-fluid">
@@ -125,11 +127,6 @@ if (isset($_POST['get_reports'])) {
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th colspan="13" style="text-align:right"></th>
-                                                </tr>
-                                            </tfoot>
                                             <tbody>
                                                 <?php
                                                 foreach ($result as $data) {
@@ -172,6 +169,21 @@ if (isset($_POST['get_reports'])) {
                                                 <?php }
                                                 ?>
                                             </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <th colspan="3"></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
                                     <?php
@@ -194,7 +206,13 @@ if (isset($_POST['get_reports'])) {
 
 <script>
     $('#from_date, #to_date').datepicker({dateFormat: "DD, d MM, yy"});
-    $('#from_date, #to_date').datepicker().datepicker("setDate", new Date());
+
+    var fdate = '<?php echo date("l, d F, Y", strtotime($fdate)); ?>';
+    var tdate = '<?php echo date("l, d F, Y", strtotime($tdate)); ?>';
+
+    $("#from_date").datepicker().datepicker("setDate", fdate);
+    $("#to_date").datepicker().datepicker("setDate", tdate);
+
 </script>
 
 <link href="assets/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -202,12 +220,10 @@ if (isset($_POST['get_reports'])) {
 <script src = "assets/js/jquery.dataTables.min.js"></script>
 <!-- start - This is for export functionality only -->
 <script src="assets/js/dataTables.buttons.min.js"></script>
-<script src="assets/js/buttons.flash.min.js"></script>
 <script src="assets/js/jszip.min.js"></script>
 <script src="assets/js/pdfmake.min.js"></script>
 <script src="assets/js/vfs_fonts.js"></script>
 <script src="assets/js/buttons.html5.min.js"></script>
-<!--<script src="assets/js/buttons.print.min.js"></script>-->
 <script>
     if ($(".results").length != 0)
     {
@@ -220,41 +236,43 @@ if (isset($_POST['get_reports'])) {
                 ['10 rows', '25 rows', '50 rows', 'Show all']
             ],
             buttons: [
-                'pageLength', 'copy', 'csv',
+                'pageLength',
+                {
+                    extend: 'copy',
+                    footer: true
+                },
+                {
+                    extend: 'csv',
+                    footer: true
+                },
                 {
                     extend: 'excel',
                     footer: true
                 },
                 {
                     extend: 'pdf',
-                    orientation: 'landscape'
+                    orientation: 'landscape',
+                    footer: true
                 }
             ],
             "footerCallback": function ( row, data, start, end, display ) {
                 var api = this.api(), data;
-                var colNumber = [12];
+                var colNumber = [3, 4, 5, 6, 7, 8, 9, 10, 12];
                 var intVal = function ( i ) {
-                    return typeof i === 'string' ?
-//                            i.replace(/[, ₹&nbsp;]|(\.\d{2})/g, "") * 1 :
-                            i.replace(/(\.\d{2})/g, "") * 1 :
-                            typeof i === 'number' ?
-                            i : 0;
+                    return typeof i === 'string' ? i * 1 : typeof i === 'number' ? i : 0;
                 };
                 for (i = 0; i < colNumber.length; i++) {
                     var colNo = colNumber[i];
-                    var total2 = api
-                            .column(colNo, {page: 'current'})
+                    var sum = api
+                            .column(colNo)
                             .data()
                             .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                },0 );
-                    $(api.column(colNo).footer()).html('TOTAL ₹&nbsp;' + (total2));
+                                return intVal(a) + intVal(b);
+                            },0 );
+                    $(api.column(colNo).footer()).html(sum);
                 }
             }
         });
     }
 </script>
-
-
-
 <?php include_once 'include/footer.php'; ?>

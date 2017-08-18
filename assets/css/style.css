@@ -854,8 +854,6 @@ pre {
     position: absolute;
     right: 0;
     background: #ffffff;
-    padding-top: 20px;
-    padding-bottom: 20px;
 }
 .bg-title {
     background: #ffffff;
@@ -2466,6 +2464,7 @@ table.dataTable thead .sorting:after {
     float: left;
     width: 600px;
     padding-left: 105px;
+    padding-top: 25px;
 }
 
 .right-foot{

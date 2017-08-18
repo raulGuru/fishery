@@ -25,20 +25,13 @@ if (isset($segments[1]) && $segments[1] == 'searchticket.php') {
         <link rel="icon" type="image/png" sizes="16x16" href="assets/images/mhlogo-favicon.ico">
         <title>Department of Fisheries</title>
         <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-        <!--    <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css" />-->
-        <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+        <link href="assets/css/jquery-ui.min.css" rel="stylesheet" >
         <link href="assets/css/style.css" rel="stylesheet">
         <link href="assets/css/megna-dark.css" rel="stylesheet">
-        <link href="assets/css/switchery.min.css" rel="stylesheet">
 
         <script src="assets/js/jquery-3.2.1.min.js"></script>
-    <!--    <script src="assets/js/moment.js"></script>-->
-    <!--    <script src="assets/js/bootstrap-datepicker.min.js"></script>-->
         <script src="assets/js/jquery-ui.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
-<!--        <script src="assets/js/switchery.min.js"></script>-->
-        <script src="assets/js/jquery.numeric-min.js"></script>
-    <!--    <script src="assets/js/validator.min.js"></script>-->
     </head>
     <body class="fix-header">
 
