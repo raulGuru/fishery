@@ -128,7 +128,6 @@ if (isset($_POST['get_reports'])) {
                                             <tfoot>
                                                 <tr>
                                                     <th colspan="13" style="text-align:right"></th>
-                                                    <!--<th></th>-->
                                                 </tr>
                                             </tfoot>
                                             <tbody>
