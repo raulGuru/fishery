@@ -7,12 +7,11 @@ if ($_SESSION['session'] == '') {
 }
 
 $segments = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
-if(isset($segments[1]) && $segments[1] == 'searchticket.php') {
+if (isset($segments[1]) && $segments[1] == 'searchticket.php') {
     $active = '2';
-}else if(isset($segments[1]) && $segments[1] == 'report.php') {
+} else if (isset($segments[1]) && $segments[1] == 'report.php') {
     $active = '3';
-}
-else{
+} else {
     $active = '1';
 }
 ?>
@@ -23,7 +22,7 @@ else{
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/png" sizes="16x16" href="">
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/images/mhlogo-favicon.ico">
         <title>Department of Fisheries</title>
         <link href="assets/css/bootstrap.min.css" rel="stylesheet">
         <!--    <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css" />-->

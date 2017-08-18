@@ -850,10 +850,12 @@ pre {
     bottom: 0;
     color: #58666e;
     left: 0px;
-    padding: 20px 30px;
+    /*padding: 20px 30px;*/
     position: absolute;
     right: 0;
     background: #ffffff;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 .bg-title {
     background: #ffffff;
@@ -2458,6 +2460,29 @@ table.dataTable thead .sorting:after {
     animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
+}
+
+.left-foot{
+    float: left;
+    width: 600px;
+    padding-left: 105px;
+}
+
+.right-foot{
+    float: right;
+    width: 350px;
+    padding-right: 105px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.right-foot img {
+    height: 45px;
+    width: 135px;
+}
+
+#myTable tfoot tr > th {
+    text-align: center;
 }
 @-webkit-keyframes rotate {
     from {
