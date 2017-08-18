@@ -7,17 +7,19 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="white-box">
-                        <h3 class="box-title">Search ticket</h3>
-                        <div class="row m-t-20">
-                            <div class="col-md-9">
-                                <div class="col-md-2">
-                                    <h5 class="m-b-30">Transaction ID</h5>
-                                </div>
-                                <div class="col-md-4">
-                                    <fieldset class="form-group">
-                                        <input class="form-control" type="text"  size="35" placeholder="" required="required" name="transactionid" value="<?php echo ((isset($_POST['transactionid']) && !empty(trim($_POST['transactionid']))) ? $_POST['transactionid'] : '') ?>">
-                                    </fieldset>
-                                    <button type="submit" class="btn btn-custom" name="search_ticket" value="search" id="" style="margin-left: -14px; margin-top: -10px">Submit</button>
+                        <div class="row">
+                            <h3 class="box-title">Search ticket</h3>
+                            <div class="row m-t-20" style="margin-left: 10px">
+                                <div class="col-md-9">
+                                    <div class="col-md-2">
+                                        <h5 class="m-b-30">Transaction ID</h5>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <fieldset class="form-group">
+                                            <input class="form-control" type="text"  size="35" placeholder="" required="required" name="transactionid" value="<?php echo ((isset($_POST['transactionid']) && !empty(trim($_POST['transactionid']))) ? $_POST['transactionid'] : '') ?>">
+                                        </fieldset>
+                                        <button type="submit" class="btn btn-custom" name="search_ticket" value="search" id="" style="margin-left: -14px; margin-top: -10px">Submit</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +96,7 @@
                                         <tr>
                                             <td>Total</td>
                                             <td><?php echo $totalR->adult; ?></td>
-        <!--                                        <td>--><?php //echo $totalR->child;  ?><!--</td>-->
+        <!--                                        <td>--><?php //echo $totalR->child;       ?><!--</td>-->
                                             <td><?php echo $totalR->visitoramount; ?></td>
                                         </tr>
                                         <tr>
@@ -126,7 +128,7 @@
                     </div>
                 </div>
 
-    <?php } else { ?>
+            <?php } else { ?>
 
                 <div class="row">
                     <div class="col-md-12">
@@ -135,7 +137,7 @@
                         </div>
                     </div>
                 </div>
-            <?php
+                <?php
             }
         }
         ?>

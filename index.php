@@ -19,7 +19,7 @@ if (isset($_POST['edit_ticket'])) {
                     <?php } ?>
                     <div class="white-box">
                         <div class="row">
-                            <h3 class="box-title" style="margin-left: 40px !important;">Select Date & Time of Visit</h3>
+                            <h3 class="box-title">Select Date & Time of Visit</h3>
 
                             <div class="table-responsive" style="margin-top: -20px">
                                 <div class="col-md-4" style="padding-left: 0px !important;padding-right: 0px !important;">
